@@ -1,0 +1,29 @@
+h1 {
+	text-align: center;
+}
+
+code {
+	display: inline-block;
+	color: #333;
+	min-width: 50%;
+	background-color: #DEDEDE;
+	border: 1px solid #BBB;
+	border-radius: 5px;
+	padding: 10px;
+}
+
+.inlineCode {
+	display: inline;
+	padding: 2px 8px;
+}
+
+.tip {
+	display: inline-block;
+	border-radius: 10px;
+	background-color: #FFF;
+	padding: 0px 10px;
+}
+
+.dot::before {
+	content: "●  ";
+}

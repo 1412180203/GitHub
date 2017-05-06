@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>chapter-02</title>
+	<link rel="stylesheet" type="text/css" href="css/main.css" />
+</head>
+<body>
+	<h1>第2章 Git的导入</h1>
+	<h2>2.1 安装</h2>
+	<p>
+		git官方下载地址: https://git-scm.com/download
+	</p>
+	<h2>2.2 初始化设置</h2>
+	<h3>设置姓名和邮箱地址</h3>
+	<p>设置使用Git时的姓名和邮箱地址（名字请用英文输入）</p>
+	<code>
+		$ git config --global user.name "Firstname Lastname"<br />
+		$ git config --global user.email "your_eamil@example.com"
+	</code>
+	<p>这个命令，会在 “~/.gitconfig” 中以如下形式输出设置文件</p>
+	<code>
+		[user]<br />
+		name = Firstname Lastname<br />
+		email = your_email@example.com
+	</code>
+	<p>
+		想更改这些信息时，可以直接编辑这个设置文件。这里设置的姓名和邮箱地址会用在 Git 的提交日志中。<br />
+		由于在 GitHub 上公开仓库时，这里的姓名和邮箱地址也会随着提交日志一同被公开，所以请不要使用不便公开的隐私信息。<br />
+		在 GitHub 上公开代码后，前来参考的程序员可能来自世界任何地方，所以请不要使用汉字，尽量用英文进行描述。
+	</p>
+	<h3>提高命令输出的可读性</h3>
+	<p>将 color.ui 设置为 auto 可以让命令的输出拥有更高的可读性。</p>
+	<code>
+		$ git config --golbal color.ui auto
+	</code>
+	<p>“~/.gitconfig” 中会增加下面一行。</p>
+	<code>
+		[color]<br />
+		ui = auto
+	</code>
+	<p>这样一来，各种命令的输出就会变得更容易分辨。</p>
+	<h2>2.3 Hint</h2>
+	<p>
+		“~/.gitconfig” 的默认存放位置是在用户目录下，比如我的是：C:\Users\662059\.gitconfig<br />
+		也可以使用如下命令来查看配置信息
+	</p>
+	<code>
+		$ git config --list
+	</code>
+</body>
+</html>

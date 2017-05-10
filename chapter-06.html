@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>chapter-06</title>
+	<link rel="stylesheet" type="text/css" href="css/main.css" />
+</head>
+<body>
+	<h1>第6章 尝试Pull Request</h1>
+	<h2>6.1发送 Pull Request 前的准备</h2>
+	<h3 class="dot">什么是 Pull Request</h3>
+	<p>Pull Request 是自己修改源代码后，请求对方仓库采纳该修改时采取的一种行为。Pull Request 在网络上也常常被简称为 PR。</p>
+	<figure>
+		<figcaption>Pull Request 的概念图</figcaption>
+		<img src="img/PR.png" />
+	</figure>
+	<h3 class="dot">查看要修正的源代码</h3>
+	<p>
+		请登录我们为各位准备的网站。该网站的源代码已经在 GitHub 上公开。各位请将自己的感想写入源代码，然后发送 Pull Request。<br />
+		这个网站通过 GitHub 的 GitHub Pages 功能发布。 GitHub Pages 的网站的源代码位于仓库的 gh-pages 分支。访问仓库页面，我们就可以看到源代码。<br />
+		记述感想时需要修改 index.html 文件。各位不妨先查看它的源代码，对内容有个印象。
+	</p>
+	<h3 class="dot">Fork</h3>
+	<p>
+		各位请访问仓库页面，点击 Fork 按钮创建自己的仓库。新建的仓库名为“自己的账户名 /first-pr”。
+	</p>
+	<h3 class="dot">clone</h3>
+	<p>
+		clone 仓库所需的访问信息显示在右侧的中央部分，让我们将它复制下来，把这个仓库 clone 到当前的开发环境中。
+	</p>
+	<code>
+		$ git clone git@github.com:1412180203/first-pr.git<br />
+		Cloning into 'first-pr'...<br />
+		Enter passphrase for key '/c/Users/662059/.ssh/id_rsa': <span class="tip">输入密码</span><br />
+		remote: Counting objects: 3916, done.<br />
+		remote: Compressing objects: 100% (80/80), done.<br />
+		remote: Total 3916 (delta 46), reused 0 (delta 0), pack-reused 3836<br />
+		Receiving objects: 100% (3916/3916), 880.01 KiB | 157.00 KiB/s, done.<br />
+		Resolving deltas: 100% (2531/2531), done.<br />
+	</code>
+	<p>
+		first-pr 目录下会生成 Git 仓库。这个仓库与我们 GitHub 账户下的first-pr 仓库状态相同。现在只要在这个仓库中修改源代码进行 push，GitHub 账户中的仓库就会被修改。
+	</p>
+	<h3 class="dot">branch</h3>
+	<h4>为何要在特性分支中进行作业</h4>
+	<p>
+		当前 Git 的主流开发模式都会使用特性分支。各位请养成创建特性分支后再修改代码的好习惯。在 GitHub 上发送 Pull Request 时，一般都是发送特性分支。这样一来， Pull Request 就拥有了更明确的特性（主题）。让对方了解自己修改代码的意图，有助于提高代码审查的效率。
+	</p>
+	<h4>确认分支</h4>
+	<p>我们来查看一下 clone 出的仓库的分支</p>
+	<code>
+		$ git branch -a<br />
+		* gh-pages <span class="tip"><-当前分支</span><br />
+		&nbsp; remotes/origin/HEAD -> origin/gh-pages<br />
+		&nbsp; remotes/origin/feature/move-jquery-from-cdn-to-local<br />
+		&nbsp; remotes/origin/gh-pages
+	</code>
+	<p>
+		开头加了“remotes/origin/”的是 GitHub 端仓库的分支。我们手头的开发环境中只有 gh-pages 分支。<br />
+		网站中显示的 HTML 位于 /origin/gh-pages 分支。虽然通常情况下最新版代码都位于 master 分支，但由于本次我们使用了 GitHub Pages，所以最新代码位于 gh-pages 分支。
+	</p>
+	<h4>创建特性分支</h4>
+	<p>
+		我们创建一个名为 work 的分支，用来发送 Pull Request。这个 work分支就是这次的特性分支。现在创建 work 分支并自动切换。
+	</p>
+	<code>
+		$ git checkout -b work gh-pages<br />
+		Switched to a new branch 'work'
+	</code>
+	<p>确认是否切换到了 work 分支下。</p>
+	<code>
+		$ git branch -a<br />
+		&nbsp; gh-pages<br />
+		* work <span class="tip"><-当前分支</span><br />
+		&nbsp; remotes/origin/HEAD -> origin/gh-pages<br />
+		&nbsp; remotes/origin/feature/move-jquery-from-cdn-to-local<br />
+		&nbsp; remotes/origin/gh-pages
+	</code>
+	<p>查看文件列表，我们可以看到网站中显示的 index.html 文件</p>
+	<code>
+		$ ls<br />
+		images/  index.html  javascripts/  params.json  README.md  stylesheets/
+	</code>
+	<p>可以用浏览器打开并确认显示。</p>
+	<h3 class="dot">添加代码</h3>
+	<p>用编辑器打开 index.html 文件，以 HTML 形式添加感想。</p>
+	<code>
+		&lt;p class="impression"&gt; 这本书读着很有趣。（@HIROCASTER）&lt/p&gt
+	</code>
+	<p>请自由添加感想并用 p 标签（Tag）括起，然后关闭编辑器。</p>
+	<h3 class="dot">提交修改</h3>
+	<p>用 git diff 命令查看修改是否已经正确进行。然后用浏览器打开，查看显示是否正确。然后确认添加的代码，提交至本地仓库。</p>
+	<code>
+		$ git add index.html<br />
+		<br />
+		$ git commit -m "Add my impression"<br />
+		[work 3417802] Add my impression<br />
+		 1 file changed, 1 insertion(+)
+	</code>
+	<h3 class="dot">创建远程分支</h3>
+	<p>
+		要从 GitHub 发送 Pull Request， GitHub 端的仓库中必须有一个包含了修改后代码的分支。我们现在就来创建本地 work 分支的相应远程分支。
+	</p>
+	<code>
+		$ git push origin work<br />
+		Enter passphrase for key '/c/Users/662059/.ssh/id_rsa': <span class="tip">密码</span><br />
+		Counting objects: 3, done.<br />
+		Delta compression using up to 4 threads.<br />
+		Compressing objects: 100% (3/3), done.<br />
+		Writing objects: 100% (3/3), 378 bytes | 0 bytes/s, done.<br />
+		Total 3 (delta 2), reused 0 (delta 0)<br />
+		remote: Resolving deltas: 100% (2/2), completed with 2 local objects.<br />
+		To github.com:1412180203/first-pr.git<br />
+		&nbsp;* [new branch]&emsp;&emsp;&emsp;&emsp;work -> work
+	</code>
+	<p>查看分支， /origin/work 已被创建。</p>
+	<code>
+		$ git branch -a<br />
+		&nbsp; gh-pages<br />
+		* work<br />
+		&nbsp; remotes/origin/HEAD -> origin/gh-pages<br />
+		&nbsp; remotes/origin/feature/move-jquery-from-cdn-to-local<br />
+		&nbsp; remotes/origin/gh-pages<br />
+		&nbsp; remotes/origin/work<br />
+	</code>
+	<p>
+		请打开 GitHub 的“用户名 /first-pr”页，确认 work 分支是否被创建，以及是否已包含我们添加的代码。
+	</p>
+	<h2>6.2 发送 Pull Request</h2>
+	<p>登录 GitHub 并切换至 work 分支。点击 Clone or download 下面的 Compare，会跳转至查看分支间差别的页面。请在这里通过差别查看刚刚进行的更改是否正确。这里显示的东西就是我们本次 Pull Request 中包含的提交。</p>
+	<figure>
+		<figcaption>切换分支</figcaption>
+		<img src="img/switch.png" style="border: 1px solid #000; max-width: 60%" />
+	</figure>
+	<figure>
+		<figcaption>查看分支间差别的页面</figcaption>
+		<img src="img/check.png" style="border: 1px solid #000; max-width: 60%" />
+	</figure>
+	<p>
+		确认想要发送的 Pull Request 的内容差别无误后，请点击 Create Pull Request。随后显示的表单用于填写请求对方采纳的评论。<br />
+		确认没有问题后，点击 Send pull request 按钮。这样一来， Pull Request 的目标仓库中就会新建 Pull Request 和 Issue，同时该仓库的管理者会接到通知。<br />
+		如果想查看已发送 Pull Request 的状态，可以登录 GitHub，打开自己的控制面板查看 Pull Request 标签页。
+	</p>
+	<h2>6.3 让 Pull Request 更加有效的方法</h2>
+	<h3 class="dot">明确标出“正在开发过程中</h3>
+	<p>
+		为防止开发到一半的 Pull Request 被误合并，一般都会在标题前加上“[WIP]”字样。 WIP 是 Work In Progress 的简写，表示仍在开发过程中。等所有功能都实现之后，再消去这个前缀。这种在代码库中边讨论边开发的开发流程，要比以往在完成之后审查再反馈的流程高效得多。
+	</p>
+	<h2>6.4 仓库的维护</h2>
+	<p>
+		Fork 或 clone 来的仓库，一旦放置不管就会离最新的源代码越来越远。如果不以最新的源代码为基础进行开发，劳神费力地编写代码也很可能是白费力气。下面就让我们学习如何让仓库保持最新状态。
+	</p>
+	<p>
+		通常来说 clone 来的仓库实际上与原仓库并没有任何关系。所以我们需要将原仓库设置为远程仓库，从该仓库获取（fetch）数据与本地仓库进行合并（merge），让本地仓库的源代码保持最新状态。如下图：
+	</p>
+	<figure>
+		<figcaption>将仓库更新至最新状态</figcaption>
+		<img src="img/update.png" />
+	</figure>
+	<h3 class="dot">仓库的 Fork 与 clone</h3>
+	<p>将 octocat/Spoon-Knife 作为原仓库，在 GitHub 上进行 Fork，然后 clone。</p>
+	<code>
+		$ git clone git@github.com:hirocastest/Spoon-Knife.git<br />
+		Cloning into 'Spoon-Knife'...<br />
+		remote: Counting objects: 24, done.<br />
+		remote: Compressing objects: 100% (21/21), done.<br />
+		remote: Total 24 (delta 7), reused 17 (delta 1)<br />
+		Receiving objects: 100% (24/24), 74.36 KiB | 68 KiB/s, done.<br />
+		Resolving deltas: 100% (7/7), done.<br />
+		$ cd Spoon-Knife
+	</code>
+	<h3 class="dot">给原仓库设置名称</h3>
+	<p>我们给原仓库设置 upstream 的名称，将其作为远程仓库</p>
+	<code>
+		$ git remote add upstream git://github.com/octocat/Spoon-Knife.git
+	</code>
+	<p>今后，我们的这个仓库将以 upstream 作为原仓库的标识符。这个环境下只需要设定一次。</p>
+	<h3 class="dot">获取最新数据</h3>
+	<p>
+		下面我们从远程仓库实际获取（fetch）最新源代码，与自己仓库的分支进行合并。要让仓库维持最新状态，只需要重复这一工作即可。
+	</p>
+	<code>
+		$ git fetch upstream<br />
+		From git://github.com/octocat/Spoon-Knife<br />
+		&nbsp;* [new branch]&emsp;&emsp;&emsp;master&emsp;&emsp;&emsp; -> upstream/master<br />
+		$ git merge upstream/master<br />
+		Already up-to-date.
+	</code>
+	<p>
+		我们通过 git fetch 命令获取最新的数据，将 upstream/master 分支与当前分支（master）合并。虽然本次示例没有可以合并的内容，但这一操作确实可以将最新的源代码合并至当前分支。
+	</p>
+	<p>
+		这样一来，当前分支（master）就获得了最新的源代码。各位在创建特性分支，编辑源代码之前，建议先将仓库更新到这一状态。一般情况下 master 分支都会获取最新代码，很少需要 Fork 的开发者亲自进行修正。
+	</p>
+</body>
+</html>

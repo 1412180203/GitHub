@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>chapter-09</title>
+	<link rel="stylesheet" type="text/css" href="css/main.css" />
+</head>
+<body>
+	<h1>第9章 使用GitHub的开发流程</h1>
+	<h2>9.1　团队使用 GitHub 时的注意事项</h2>
+	<h3 class="dot">不 Fork 仓库的方法</h3>
+	<p>
+		已经将 GitHub 利用到开源软件开发中的读者们想必会以下面的流程进行 Pull Request。
+	</p>
+	<ul style="list-style: none;">
+		<li>❶ 在 GitHub 上进行 Fork</li>
+		<li>❷ 将❶的仓库 clone 至本地开发环境</li>
+		<li>❸ 在本地环境中创建特性分支</li>
+		<li>❹ 对特性分支进行代码修改并进行提交</li>
+		<li>❺ 将特性分支 push 到❶的仓库中</li>
+		<li>❻ 在 GitHub 上对 Fork 来源仓库发送 Pull Request</li>
+	</ul>
+	<p>
+		在无法给不特定的多数人赋予提交权限的公开软件开发中，这种流程能够防止仓库收到计划之外的提交。
+	</p>
+	<p>
+		然而在公司企业的开发中，开发者每天都要见面，要经常互相发送 Pull Request，这种流程就显得有些繁琐了。因此，下面我们要介绍一个不需要 Fork 仓库的工作流程。这种方法可以让每一名开发者都掌握着一个本地仓库和一个远程仓库，使整个开发流程变得简单。
+	</p>
+	<figure>
+		<figcaption>不进行 Fork 的开发流程</figcaption>
+		<img src="img/no_fork.png" />
+	</figure>
+</body>
+</html>

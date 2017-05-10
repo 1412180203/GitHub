@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>chapter-08</title>
+	<link rel="stylesheet" type="text/css" href="css/main.css" />
+</head>
+<body>
+	<h1>第8章 与GitHub相互协作的工具及服务</h1>
+	<h2>8.1 hub 命令</h2>
+	<p>
+		在使用 GitHub 的过程中，会不可避免地频繁接触到 git 命令。而我们在这里介绍的 hub 命令 (<code class="inlineCode">https://hub.github.com/</code>) 则是一个封装了 git 命令的命令行工具，能够辅助用户使用 GitHub。这是个很方便的工具，经常使用 GitHub 的读者请务必一试。
+	</p>
+	<p>hub 命令需要以下版本的软件:● Git 1.7.3 以上&emsp;● Ruby 1.8.6 以上<!-- https://rubyinstaller.org/downloads/ --></p>
+	<h3 class="dot">安装</h3>
+	<p>如果是 OS X 系统，可以从版本管理系统的 Homebrew 或 MacPorts轻松安装。</p>
+	<p>如果用 Homebrew，则执行下面的命令。</p>
+	<code>
+		$ brew install hub
+	</code>
+	<p>如果用 MacPorts，则执行下面的命令。</p>
+	<code>
+		$ sudo port install hub
+	</code>
+	<p>只此一步就能完成安装</p>
+	<p>使用其他环境的读者请按照下面的流程安装。</p>
+	<code>
+		$ curl https://hub.github.com/standalone -sLo ~/bin/hub<br />
+		$ chmod +x ~/bin/hub
+	</code>
+	<p>通过上述命令下载 hub 命令之后，像下面这样在 shell 的环境路径后面添加 ~/bin。</p>
+	<code>
+		$ echo 'export PATH="~/bin:$PATH"' >> ~/.bash_profile
+	</code>
+	<p>重新启动 shell 后，就可以使用 hub 命令了。</p>
+</body>
+</html>

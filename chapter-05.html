@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>chapter-05</title>
+	<link rel="stylesheet" type="text/css" href="css/main.css" />
+</head>
+<body>
+	<h1>第5章 详细解说GitHub的功能</h1>
+	<h2>5.1 键盘快捷键</h2>
+	<p>
+		在 GitHub 中，很多页面都可以使用键盘快捷键。在各个页面按下 <code class="inlineCode">shift ＋ /</code> 都可以打开键盘快捷键一览表，查看当前页面的快捷键。
+	</p>
+	<img src="img/shortcut_key.png" />
+	<h2>5.2 仓库</h2>
+	<h3 class="dot">查看差别</h3>
+	<p>
+		在 GitHub 上，直接修改 URL 就可以让用户以多种形式查看差别。这里我们以 Ruby on Rails 的仓库 (<code class="inlineCode">https://github.com/rails/rails/</code>) 为例，给各位介绍直接修改 URL 的一些技巧。
+	</p>
+	<h4>查看分支间的差别</h4>
+	<p>
+		比如我们想查看 4-0-stable 分支与像下面这样将分支名加到 URL 里。<br />
+		<code class="inlineCode">https://github.com/rails/rails/compare/4-0-stable...3-2-stable</code><br />
+		这样，就可以查看两个分支间的差别了。
+	</p>
+	<h4>查看与几天前的差别</h4>
+	<p>
+		假如我们想查看 master 分支在最近 7 天内的差别，可以像下面这样这样将时间加入 URL。<br />
+		<code class="inlineCode">https://github.com/rails/rails/compare/master@{7.day.ago}...master</code><br />
+		这样，就可以查看这段期间内的差别。<br />
+		● day&emsp;● week&emsp;● month&emsp;● year<br />
+		指定期间可以使用以上四个时间单位。如果差别过大则不会列出所有提交，只显示最近的一部分。
+	</p>
+	<h4>查看与指定日期之间的差别</h4>
+	<p>
+		假设我们想查看 master 分支 2013 年 1 月 1 日与现在的区别，可以将日期加入 URL。<br />
+		<code class="inlineCode">https://github.com/rails/rails/compare/master@{2013-01-01}...master</code><br />
+		这样，便可以查看与指定日期之间的差别。但是如果指定日期与现在的差别过大，或者指定日期过于久远，则无法显示。
+	</p>
+	<h3 class="dot">获取 diff 格式与 patch 格式的文件</h3>
+	<p>
+		对长期投身于软件开发的人来说，有时可能会希望以 diff 格式文件和 patch 格式文件的形式来处理 Pull Request。<br />
+		举个例子，假设 Pull Request 的 URL 如下所示。<br />
+		<code class="inlineCode">https://github.com/用户名/仓库名/pull/28</code><br />
+		如果想获取 diff 格式的文件，只要像下面这样在 URL 末尾添加 .diff 即可。<br />
+		<code class="inlineCode">https://github.com/用户名/仓库名/pull/28.diff</code><br />
+		同理，想要patch格式的文件，只需要在 URL 末尾添加 .patch 即可。<br />
+		<code class="inlineCode">https://github.com/用户名/仓库名/pull/28.patch</code>
+	</p>
+	<h3 class="dot">引用评论</h3>
+	<p>
+		在 Conversation 中人们通过添加评论进行对话。这里有一个简单方法可以帮您引用某个人的评论。选中想引用的评论然后按 R 键，被选择的部分就会自动以评论语法写入评论文本框。这样一来就可以轻松便捷地引用评论了。该快捷键在 Issue 中同样有效。
+	</p>
+	<img src="img/conversation.png" />
+	<h3 class="dot">在评论中应用表情</h3>
+	<p>
+		在评论中输入“:”（冒号）便会启动表情自动补全功能。只要输入几个与该表情相关的字母，系统就会为您筛选自动补全的对象。选择想要的表情，其相应代码（前后都有冒号的字符串）便会插入到文本框中。<br />
+		请登录 <code class="inlineCode">http://www.emoji-cheat-sheet.com/</code> 查找可使用的表情。
+	</p>
+	<h3 class="dot">Files Changed</h3>
+	<p>
+		Files Changed 标签页中可以查看当前 Pull Request 更改的文件内容以及前后差别。标签上的数字表示新建及被更改的文件数。<br />默认情况下系统会将空格的不同也高亮显示，所以在空格有改动的情况下会难以阅读。这时只要在 URL 的末尾添加“?w=1”就可以不显示空格的差别。
+	</p>
+</body>
+</html>

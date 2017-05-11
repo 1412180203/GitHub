@@ -1,2 +1,2 @@
 # GitHub
-The reading note of Github.
+The reading notes of Github.

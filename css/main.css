@@ -27,3 +27,9 @@ code {
 .dot::before {
 	content: "●  ";
 }
+
+.footer {
+	clear:both;
+	margin-top:2em;
+	text-align:center;
+}
